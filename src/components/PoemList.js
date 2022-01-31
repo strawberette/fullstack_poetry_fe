@@ -1,9 +1,20 @@
 // import "./App.css";
 import { Link } from "react-router-dom";
 const PoemList = (props) => {
+  console.log("props.user", props.user);
   return (
     <div className="App">
-      <Link to="/post"> Post a poem</Link>
+      {props.user ? (
+        <Link to="/post"> Post a poem</Link>
+      ) : (
+        <>
+          <Link to="/register">Register</Link>
+          <br />
+          <Link to="/login">Log in</Link>
+          <br />
+        </>
+      )}
+
       {props.poemList.map((p, index) => {
         return (
           <div key={index}>

@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
-const Edit = () => {
+const Edit = (props) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const { id } = useParams();
-  const baseURL = `http://localhost/poems/${id}`;
+  const baseURL = `${process.env.REACT_APP_BASE_URL}/poems/${id}`;
+  // const baseURL = `https://noemi-poetry.herokuapp.com/poems/${id}`;
 
   const handleTitle = (e) => setTitle(e.target.value);
   const handleAuthor = (e) => setAuthor(e.target.value);
@@ -45,6 +46,18 @@ const Edit = () => {
     });
   };
 
+  if (!props.user) {
+    return (
+      <div className="App">
+        <Link to="/register">Register</Link>
+        <br />
+        <Link to="/login">Log in</Link>
+        <br />
+        <Link to="/">Home</Link>
+      </div>
+    );
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -66,6 +79,7 @@ const Edit = () => {
         ></textarea>
         <input type="submit" value="Submit" />
       </form>
+      <Link to="/">Home</Link>
     </div>
   );
 };

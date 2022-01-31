@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Poem = () => {
+const Poem = (props) => {
+  console.log(props.user);
   const [singlePoem, setSinglePoem] = useState({});
   const { id } = useParams();
-  const baseURL = `http://localhost/poems/${id}`;
+  const baseURL = `${process.env.REACT_APP_BASE_URL}/poems/${id}`;
+  // const baseURL = `https://noemi-poetry.herokuapp.com/poems/${id}`;
 
   useEffect(() => {
     handleFetch();
@@ -37,8 +39,16 @@ const Poem = () => {
         <p>{singlePoem.author}</p>
         <p dangerouslySetInnerHTML={{ __html: singlePoem.content }} />
       </div>
-      <Link to={`/edit/${singlePoem.id}`}>Edit</Link>
-      <button onClick={handleDelete}>Delete</button>
+      {!props.user ? (
+        <></>
+      ) : (
+        <>
+          <Link to={`/edit/${singlePoem.id}`}>Edit</Link>
+          <button onClick={handleDelete}>Delete</button>
+        </>
+      )}
+
+      <Link to="/">Home</Link>
     </div>
   );
 };
