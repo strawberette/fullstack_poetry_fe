@@ -42,7 +42,7 @@ function Register(props) {
     );
   }
 
-  if (response.status == 401) {
+  if (response.status === 401) {
     return (
       <div className="App">
         <p>User {user} is already registered!</p>
@@ -54,7 +54,7 @@ function Register(props) {
     );
   }
 
-  if (response.status == 201) {
+  if (response.status === 201) {
     return (
       <div className="App">
         <p>User {user} successfully registered!</p>

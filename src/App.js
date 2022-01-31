@@ -12,22 +12,21 @@ import Logout from "./components/Logout";
 function App() {
   const [poemList, setPoem] = useState([]);
   const [user, setUser] = useState(null);
-  const baseURL = `${process.env.REACT_APP_BASE_URL}/poems`;
-  // const baseURL = "https://noemi-poetry.herokuapp.com/poems";
 
   useEffect(() => {
+    const baseURL = `${process.env.REACT_APP_BASE_URL}/poems`;
+    // const baseURL = "https://noemi-poetry.herokuapp.com/poems";
+    const handleFetch = async () => {
+      const response = await fetch(baseURL, {
+        mode: "cors",
+      });
+
+      const poems = await response.json();
+
+      setPoem(poems);
+    };
     handleFetch();
   }, []);
-
-  const handleFetch = async () => {
-    const response = await fetch(baseURL, {
-      mode: "cors",
-    });
-
-    const poems = await response.json();
-
-    setPoem(poems);
-  };
 
   return (
     <Router>

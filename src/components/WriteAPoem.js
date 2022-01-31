@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const WriteAPoem = (props) => {
   const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
 
   const baseURL = `${process.env.REACT_APP_BASE_URL}/poems`;

@@ -14,19 +14,18 @@ const Edit = (props) => {
   const handleContent = (e) => setContent(e.target.value);
 
   useEffect(() => {
+    const handleFetch = async () => {
+      const response = await fetch(baseURL, {
+        mode: "cors",
+      });
+      const resPoem = await response.json();
+
+      setTitle(resPoem.poem.title);
+      setAuthor(resPoem.poem.author);
+      setContent(resPoem.poem.content);
+    };
     handleFetch();
   }, []);
-
-  const handleFetch = async () => {
-    const response = await fetch(baseURL, {
-      mode: "cors",
-    });
-    const resPoem = await response.json();
-
-    setTitle(resPoem.poem.title);
-    setAuthor(resPoem.poem.author);
-    setContent(resPoem.poem.content);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

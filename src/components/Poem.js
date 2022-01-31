@@ -12,18 +12,17 @@ const Poem = (props) => {
   // const baseURL = `https://noemi-poetry.herokuapp.com/poems/${id}`;
 
   useEffect(() => {
+    const handleFetch = async () => {
+      const response = await fetch(baseURL, {
+        mode: "cors",
+      });
+
+      const resPoem = await response.json();
+
+      setSinglePoem(resPoem.poem);
+    };
     handleFetch();
   }, []);
-
-  const handleFetch = async () => {
-    const response = await fetch(baseURL, {
-      mode: "cors",
-    });
-
-    const resPoem = await response.json();
-
-    setSinglePoem(resPoem.poem);
-  };
 
   const handleDelete = async () => {
     await fetch(baseURL, {

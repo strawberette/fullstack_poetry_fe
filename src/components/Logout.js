@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-
 function Login({ user, setUser }) {
   const handleClick = () => {
     setUser(null);
