@@ -8,7 +8,7 @@ const Poem = (props) => {
   console.log(props.user);
   const [singlePoem, setSinglePoem] = useState({});
   const { id } = useParams();
-  const baseURL = `${process.env.REACT_APP_BASE_URL}/poems/${id}`;
+  const baseURL = `${process.env.REACT_APP_BASE_URL}/poems/${id}?secret_token=${props.user.jwt}`;
   // const baseURL = `https://noemi-poetry.herokuapp.com/poems/${id}`;
 
   useEffect(() => {

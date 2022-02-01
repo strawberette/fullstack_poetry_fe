@@ -15,11 +15,11 @@ const WriteAPoem = (props) => {
     e.preventDefault();
     const payload = JSON.stringify({
       title: title,
-      author: props.user.username,
+      userId: props.user.id,
       content: content,
     });
 
-    await fetch(baseURL, {
+    await fetch(`${baseURL}?secret_token=${props.user.jwt}`, {
       method: "POST",
       mode: "cors",
       headers: {

@@ -3,14 +3,12 @@ import { useParams, Link } from "react-router-dom";
 
 const Edit = (props) => {
   const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const { id } = useParams();
-  const baseURL = `${process.env.REACT_APP_BASE_URL}/poems/${id}`;
+  const baseURL = `${process.env.REACT_APP_BASE_URL}/poems/${id}?secret_token=${props.user.jwt}`;
   // const baseURL = `https://noemi-poetry.herokuapp.com/poems/${id}`;
 
   const handleTitle = (e) => setTitle(e.target.value);
-  const handleAuthor = (e) => setAuthor(e.target.value);
   const handleContent = (e) => setContent(e.target.value);
 
   useEffect(() => {
@@ -21,7 +19,6 @@ const Edit = (props) => {
       const resPoem = await response.json();
 
       setTitle(resPoem.poem.title);
-      setAuthor(resPoem.poem.author);
       setContent(resPoem.poem.content);
     };
     handleFetch();
@@ -31,7 +28,7 @@ const Edit = (props) => {
     e.preventDefault();
     const payload = JSON.stringify({
       title: title,
-      author: author,
+      userId: props.user.id,
       content: content,
     });
 
@@ -63,12 +60,6 @@ const Edit = (props) => {
         <label htmlFor="title">Title</label>
         <input type="text" name="title" value={title} onChange={handleTitle} />
         <label htmlFor="author">Author</label>
-        <input
-          type="text"
-          name="author"
-          value={author}
-          onChange={handleAuthor}
-        />
         <label htmlFor="content"></label>
         <textarea
           type="text"
