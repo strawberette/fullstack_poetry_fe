@@ -27,17 +27,12 @@ function Register(props) {
     });
 
     setResponse(res);
-
-    // const resJson = await res.json();
-    // console.log(resJson);
-    // setResult(resJson);
   };
   if (props.user) {
     return (
       <div className="App">
         <p>You are already logged in!</p>
         <br />
-        <Link to="/">Home</Link>
       </div>
     );
   }
@@ -49,7 +44,6 @@ function Register(props) {
         <br />
         <a href="/register">Try again</a>
         <br />
-        <Link to="/">Home</Link>
       </div>
     );
   }
@@ -59,7 +53,6 @@ function Register(props) {
       <div className="App">
         <p>User {user} successfully registered!</p>
         <br />
-        <Link to="/">Home</Link>
       </div>
     );
   }
