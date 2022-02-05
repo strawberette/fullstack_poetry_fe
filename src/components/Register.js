@@ -65,20 +65,37 @@ function Register(props) {
   }
 
   return (
-    <form onSubmit={submitForm}>
-      <label htmlFor="user">User:</label>
-      <input type="text" name="user" value={user} onChange={handleUserChange} />
+    <div className="loginPage">
+      <div className="loginForm">
+        <img src="/Typewriter-rafiki.png" width="300px" />
+        <h1>Register</h1>
+        <form onSubmit={submitForm}>
+          <label htmlFor="user">User</label>
+          <br />
+          <input
+            type="text"
+            name="user"
+            value={user}
+            onChange={handleUserChange}
+          />
+          <br />
+          <br />
 
-      <label htmlFor="password">Password:</label>
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={handlePasswordChange}
-      />
+          <label htmlFor="password">Password</label>
+          <br />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <br />
+          <br />
 
-      <input type="submit" value="Submit" />
-    </form>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </div>
   );
 }
 

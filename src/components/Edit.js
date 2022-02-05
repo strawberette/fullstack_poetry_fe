@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Redirect } from "react-router-dom";
 
 const Edit = (props) => {
   const [title, setTitle] = useState("");
@@ -41,35 +41,43 @@ const Edit = (props) => {
       body: payload,
     });
   };
-
   if (!props.user) {
-    return (
-      <div className="App">
-        <Link to="/register">Register</Link>
-        <br />
-        <Link to="/login">Log in</Link>
-        <br />
-        <Link to="/">Home</Link>
-      </div>
-    );
+    return <Redirect to="/" />;
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title</label>
-        <input type="text" name="title" value={title} onChange={handleTitle} />
-        <label htmlFor="author">Author</label>
-        <label htmlFor="content"></label>
-        <textarea
-          type="text"
-          name="content"
-          value={content}
-          onChange={handleContent}
-        ></textarea>
-        <input type="submit" value="Submit" />
-      </form>
-      <Link to="/">Home</Link>
+    <div className="loginPage">
+      <div className="loginForm">
+        <img src="/Creative-writing-pana.png" width="300px" />
+        <h1>Edit</h1>
+
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="title">Title</label>
+          <br />
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={handleTitle}
+          />
+          <br />
+          <br />
+
+          <label htmlFor="content">Content</label>
+          <br />
+          <textarea
+            rows="10"
+            cols="50"
+            type="text"
+            name="content"
+            value={content}
+            onChange={handleContent}
+          ></textarea>
+          <br />
+          <br />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     </div>
   );
 };

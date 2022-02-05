@@ -1,38 +1,57 @@
+body {
+  background-color: lightblue;
+  display: flex;
+}
+
 .App {
-  text-align: center;
+  padding: 20px;
+  flex: 1;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.siteContent {
+  display: flex;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.brand {
+  /* align-self: end; */
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.logo {
+  width: 150px;
+  height: 150px;
+}
+
+.loginPage {
+  display: flex;
+  justify-content: flex-end;
+}
+.loginForm {
+  margin-top: 100px;
+
+  width: 300px;
+  align-self: flex-end;
+}
+.poemList {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: stretch;
 }
 
-.App-link {
-  color: #61dafb;
+.poemBox {
+  /* max-width: 300px; */
+  border: 1px dotted gray;
+  padding: 10px;
+  margin: 10px;
+  /* background-color: linen; */
+  background: linen url("../public/Creative-writing-bro.png") no-repeat top
+    right;
+  background-size: 100px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+footer {
+  align-self: flex-end;
+  flex-basis: 100vw;
 }

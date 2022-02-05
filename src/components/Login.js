@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 function Login({ user, setUser }) {
   const [userName, setUserName] = useState("");
@@ -25,44 +25,49 @@ function Login({ user, setUser }) {
       body: payload,
     });
     const data = await res.json();
-    setUser({ username: data.user.name, id: data.user.id, jwt: data.token });
-    console.log(data.user.name);
+    const loggedInUser = {
+      username: data.user.name,
+      id: data.user.id,
+      jwt: data.token,
+    };
+    localStorage.setItem("user", JSON.stringify(loggedInUser));
+    setUser(loggedInUser);
   };
   if (user) {
-    return (
-      <div className="App">
-        <p>You are already logged in!</p>
-        <br />
-        <Link to="/">Home</Link>
-      </div>
-    );
+    return <Redirect to="/" />;
   }
 
   return (
-    <>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="user">User:</label>
-        <input
-          type="text"
-          name="user"
-          value={userName}
-          onChange={handleUserName}
-        />
+    <div className="loginPage">
+      <div className="loginForm">
+        <img src="/Typewriter-rafiki.png" width="300px" />
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="user">User</label>
+          <br />
+          <input
+            type="text"
+            name="user"
+            value={userName}
+            onChange={handleUserName}
+          />
+          <br />
+          <br />
+          <label htmlFor="password">Password</label>
+          <br />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePassword}
+          />
+          <br />
+          <br />
 
-        <label htmlFor="password">User:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-
-        <input type="submit" value="Submit" />
-      </form>
-
-      <Link to="/">Home</Link>
-    </>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </div>
   );
 }
 

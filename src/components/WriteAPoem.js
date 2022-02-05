@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const WriteAPoem = (props) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isCreated, setIsCreated] = useState(false);
 
   const baseURL = `${process.env.REACT_APP_BASE_URL}/poems`;
   // const baseURL = `https://noemi-poetry.herokuapp.com/poems/`;
@@ -27,35 +28,42 @@ const WriteAPoem = (props) => {
       },
       body: payload,
     });
+    setIsCreated(true);
   };
-  if (!props.user) {
-    return (
-      <div className="App">
-        <Link to="/register">Register</Link>
-        <br />
-        <Link to="/login">Log in</Link>
-        <br />
-        <Link to="/">Home</Link>
-      </div>
-    );
+  if (!props.user || isCreated) {
+    return <Redirect to="/" />;
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title</label>
-        <input type="text" name="title" value={title} onChange={handleTitle} />
-        <label htmlFor="content"></label>
-        <textarea
-          type="text"
-          name="content"
-          value={content}
-          onChange={handleContent}
-        ></textarea>
-        <input type="submit" value="Submit" />
-      </form>
-
-      <Link to="/">Home</Link>
+    <div className="loginPage">
+      <div className="loginForm">
+        <img src="/Creative-writing-pana.png" width="300px" />
+        <h1>Write a poem</h1>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="title">Title</label>
+          <br />
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={handleTitle}
+          />
+          <br />
+          <br />
+          <label htmlFor="content">Content</label>
+          <br></br>
+          <textarea
+            rows="10"
+            cols="50"
+            type="text"
+            name="content"
+            value={content}
+            onChange={handleContent}
+          ></textarea>
+          <br /> <br />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     </div>
   );
 };
